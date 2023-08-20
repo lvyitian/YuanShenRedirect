@@ -1,0 +1,9 @@
+ext {
+    moduleLibraryName = "yuanshenredirect"
+    magiskModuleId = "zygisk_yuanshenredirect"
+    moduleName = "YuanShenRedirect"
+    moduleAuthor = "Perfare"
+    moduleDescription = "Redirect file access of YuanShen"
+    moduleVersion = "v1.0.0"
+    moduleVersionCode = 1
+}
