@@ -57,16 +57,36 @@ char* str_replace(char* orig, char* rep, char* with) {
 char* path_replace(const char* path)
 {
     path=str_replace(path,"/data/media/0/Android/data/com.miHoYo.Yuanshen/files/VideoAssets","/data/sdext2/ys/VideoAssets");
+    char* tmp=path;
     path=str_replace(path,"/storage/emulated/0/Android/data/com.miHoYo.Yuanshen/files/VideoAssets","/data/sdext2/ys/VideoAssets");
+    if(tmp) free(tmp);
+    tmp=path;
     path=str_replace(path,"/storage/sdcard0/Android/data/com.miHoYo.Yuanshen/files/VideoAssets","/data/sdext2/ys/VideoAssets");
+    if(tmp) free(tmp);
+    tmp=path;
     path=str_replace(path,"/storage/self/primary/Android/data/com.miHoYo.Yuanshen/files/VideoAssets","/data/sdext2/ys/VideoAssets");
+    if(tmp) free(tmp);
+    tmp=path;
     path=str_replace(path,"/data/data/com.miHoYo.Yuanshen/files/VideoAssets","/data/sdext2/ys/VideoAssets");
+    if(tmp) free(tmp);
+    tmp=path;
     path=str_replace(path,"/mnt/user/0/emulated/0/Android/data/com.miHoYo.Yuanshen/files/VideoAssets","/data/sdext2/ys/VideoAssets");
+    if(tmp) free(tmp);
+    tmp=path;
     path=str_replace(path,"/mnt/user/0/sdcard0/Android/data/com.miHoYo.Yuanshen/files/VideoAssets","/data/sdext2/ys/VideoAssets");
+    if(tmp) free(tmp);
+    tmp=path;
     path=str_replace(path,"/mnt/user/0/self/primary/Android/data/com.miHoYo.Yuanshen/files/VideoAssets","/data/sdext2/ys/VideoAssets");
+    if(tmp) free(tmp);
+    tmp=path;
     path=str_replace(path,"/mnt/sdcard/Android/data/com.miHoYo.Yuanshen/files/VideoAssets","/data/sdext2/ys/VideoAssets");
+    if(tmp) free(tmp);
+    tmp=path;
     path=str_replace(path,"/data/user/0/com.miHoYo.Yuanshen/files/VideoAssets","/data/sdext2/ys/VideoAssets");
+    if(tmp) free(tmp);
+    tmp=path;
     path=str_replace(path,"/data/user_de/0/com.miHoYo.Yuanshen/files/VideoAssets","/data/sdext2/ys/VideoAssets");
+    if(tmp) free(tmp);
     return path;
 }
 int statvfs_hook(const char* path, void* status)

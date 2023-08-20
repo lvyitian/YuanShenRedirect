@@ -4,6 +4,6 @@ ext {
     moduleName = "YuanShenRedirect"
     moduleAuthor = "Perfare"
     moduleDescription = "Redirect file access of YuanShen"
-    moduleVersion = "v1.1.0"
+    moduleVersion = "v1.2.0"
     moduleVersionCode = 1
 }
