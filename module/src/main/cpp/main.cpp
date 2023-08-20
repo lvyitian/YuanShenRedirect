@@ -70,7 +70,7 @@ private:
                 struct stat sb{};
                 fstat(fd, &sb);
                 length = sb.st_size;
-                data = mmap(nullptr, length, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_SHARED, fd, 0);
+                data = mmap(nullptr, length, PROT_READ | PROT_EXEC, MAP_PRIVATE, fd, 0);
                 close(fd);
             } else {
                 LOGW("Unable to open arm file");
