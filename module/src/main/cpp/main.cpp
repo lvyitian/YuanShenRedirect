@@ -25,7 +25,7 @@ public:
     void preAppSpecialize(AppSpecializeArgs *args) override {
         auto package_name = env->GetStringUTFChars(args->nice_name, nullptr);
         auto app_data_dir = env->GetStringUTFChars(args->app_data_dir, nullptr);
-        preSpecialize(package_name, app_data_dir);
+        preSpecialize(package_name, app_data_dir,args->uid);
         env->ReleaseStringUTFChars(args->nice_name, package_name);
         env->ReleaseStringUTFChars(args->app_data_dir, app_data_dir);
     }
@@ -41,11 +41,14 @@ private:
     char *game_data_dir;
     void *data;
     size_t length;
+    jint uid;
 
-    void preSpecialize(const char *package_name, const char *app_data_dir) {
+    void preSpecialize(const char *package_name, const char *app_data_dir, jint uid) {
         //if (strcmp(package_name, GamePackageName) == 0) {
+        if(uid>=10000) {
             LOGI("detect game: %s", package_name);
             enable_hack=true;
+            this->uid=uid;
             if(app_data_dir) {
                 game_data_dir = new char[strlen(app_data_dir) + 1];
                 strcpy(game_data_dir, app_data_dir);
@@ -69,9 +72,9 @@ private:
                 LOGW("Unable to open arm file");
             }
 #endif
-        /*} else {
+        } else {
             api->setOption(zygisk::Option::DLCLOSE_MODULE_LIBRARY);
-        }*/
+        }
     }
 };
 
