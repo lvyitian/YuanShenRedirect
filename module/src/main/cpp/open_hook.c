@@ -69,6 +69,105 @@ char* path_replace(const char* path)
     path=str_replace(path,"/data/user_de/0/com.miHoYo.Yuanshen/files/VideoAssets","/data/sdext2/ys/VideoAssets");
     return path;
 }
+int statvfs_hook(const char* path, void* status)
+{
+    path=path_replace(path);
+    int res = BYTEHOOK_CALL_PREV(statvfs_hook, statvfs_t, path,status);
+    if(path) free(path);
+    BYTEHOOK_POP_STACK();
+    return res;
+}
+int ftw_hook(const char* path,ftw_func_t func,int ndirs)
+{
+    path=path_replace(path);
+    int res = BYTEHOOK_CALL_PREV(ftw_hook, ftw_t, path,func,ndirs);
+    if(path) free(path);
+    BYTEHOOK_POP_STACK();
+    return res;
+}
+int lstat_hook(const char* path,void* size)
+{
+    path=path_replace(path);
+    int res = BYTEHOOK_CALL_PREV(lstat_hook, lstat_t, path,size);
+    if(path) free(path);
+    BYTEHOOK_POP_STACK();
+    return res;
+}
+int stat_hook(const char* path,void* size)
+{
+    path=path_replace(path);
+    int res = BYTEHOOK_CALL_PREV(stat_hook, stat_t, path,size);
+    if(path) free(path);
+    BYTEHOOK_POP_STACK();
+    return res;
+}
+ssize_t readlink_hook(const char* path,char* buf,size_t len) {
+    path=path_replace(path);
+    int res = BYTEHOOK_CALL_PREV(readlink_hook, readlink_t, path,buf,len);
+    if(path) free(path);
+    BYTEHOOK_POP_STACK();
+    return res;
+}
+
+int symlink_hook(const char* old, const char* new)
+{
+    old=path_replace(old);
+    new=path_replace(new);
+    int res=BYTEHOOK_CALL_PREV(symlink_hook,symlink_t,old,new);
+    if(old) free(old);
+    if(new) free(new);
+    BYTEHOOK_POP_STACK();
+    return res;
+}
+int link_hook(const char* old, const char* new)
+{
+    old=path_replace(old);
+    new=path_replace(new);
+    int res=BYTEHOOK_CALL_PREV(link_hook,link_t,old,new);
+    if(old) free(old);
+    if(new) free(new);
+    BYTEHOOK_POP_STACK();
+    return res;
+}
+int mkdir_hook(const char* path,mode_t mode)
+{
+    path=path_replace(path);
+    int res = BYTEHOOK_CALL_PREV(mkdir_hook, mkdir_t, path,mode);
+    if(path) free(path);
+    BYTEHOOK_POP_STACK();
+    return res;
+}
+int unlink_hook(const char* path)
+{
+    path=path_replace(path);
+    int res = BYTEHOOK_CALL_PREV(unlink_hook, unlink_t, path);
+    if(path) free(path);
+    BYTEHOOK_POP_STACK();
+    return res;
+}
+int rmdir_hook(const char* path)
+{
+    path=path_replace(path);
+    int res = BYTEHOOK_CALL_PREV(rmdir_hook, rmdir_t, path);
+    if(path) free(path);
+    BYTEHOOK_POP_STACK();
+    return res;
+}
+int remove_hook(const char* path)
+{
+    path=path_replace(path);
+    int res = BYTEHOOK_CALL_PREV(remove_hook, remove_t, path);
+    if(path) free(path);
+    BYTEHOOK_POP_STACK();
+    return res;
+}
+int create_hook(const char* path,mode_t mode){
+    path=path_replace(path);
+    int res = BYTEHOOK_CALL_PREV(create_hook, create_t, path,mode);
+    if(path) free(path);
+    BYTEHOOK_POP_STACK();
+    return res;
+}
 int access_hook(const char* path, int mode) {
     path=path_replace(path);
     int res = BYTEHOOK_CALL_PREV(access_hook, access_t, path,mode);
