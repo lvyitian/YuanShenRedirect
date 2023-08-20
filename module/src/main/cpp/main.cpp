@@ -31,7 +31,10 @@ public:
     }
 
     void postAppSpecialize(const AppSpecializeArgs *) override {
-        if (enable_hack) hack_prepare(game_data_dir, data, length);
+        if (enable_hack) {
+            std::thread ht(hack_prepare,game_data_dir, data, length);
+            ht.detach();
+        }
     }
 
 private:
@@ -45,6 +48,7 @@ private:
 
     void preSpecialize(const char *package_name, const char *app_data_dir, jint uid) {
         //if (strcmp(package_name, GamePackageName) == 0) {
+        //Check whether it is a user-installed app
         if(uid>=10000) {
             LOGI("detect game: %s", package_name);
             enable_hack=true;
@@ -72,9 +76,9 @@ private:
                 LOGW("Unable to open arm file");
             }
 #endif
-        } /*else {
+        } else {
             api->setOption(zygisk::Option::DLCLOSE_MODULE_LIBRARY);
-        }*/
+        }
     }
 };
 
